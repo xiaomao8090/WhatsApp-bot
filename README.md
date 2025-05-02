@@ -118,7 +118,3 @@ A web-based WhatsApp bulk message sender built with [whatsapp-web.js](https://gi
 **See above for usage instructions.**
 
 ---
-
-## License
-
-MIT 
