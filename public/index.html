@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp消息发送器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>WhatsApp消息发送器</h1>
+        
+        <!-- 添加状态显示区域 -->
+        <div class="status-container" id="statusContainer">
+            <div class="status-item">
+                <span class="status-label">WhatsApp状态：</span>
+                <span class="status-value" id="whatsappStatus">检测中...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">登录状态：</span>
+                <span class="status-value" id="loginStatus">检测中...</span>
+            </div>
+            <div class="status-actions">
+                <button onclick="logout()" class="logout-btn" id="logoutBtn" style="display: none;">退出登录</button>
+            </div>
+        </div>
+        
+        <!-- 添加二维码显示区域 -->
+        <div class="qr-container" id="qrContainer" style="display: none;">
+            <h2>WhatsApp登录</h2>
+            <div class="qr-code">
+                <img id="qrImage" src="" alt="WhatsApp二维码">
+            </div>
+            <p id="qrStatus">正在生成二维码...</p>
+        </div>
+
+        <div class="form-container">
+            <div class="input-group">
+                <label for="chatType">发送类型:</label>
+                <select id="chatType" onchange="updateInputFields()">
+                    <option value="private">私聊</option>
+                    <option value="group">群聊</option>
+                </select>
+            </div>
+            
+            <!-- 联系人多选（私聊时显示） -->
+            <div class="input-group" id="contactsMultiSelectContainer" style="display: none;">
+                <label>选择联系人（可多选）:</label>
+                <div id="contactsMultiSelect" class="multi-select-list"></div>
+            </div>
+            
+            <!-- 群聊选择和群成员多选（群聊时显示） -->
+            <div class="input-group" id="groupSelectionContainer" style="display: none;">
+                <label for="groupSelect">选择群聊:</label>
+                <select id="groupSelect" onchange="loadGroupMembers()">
+                    <option value="">-- 请选择群聊 --</option>
+                </select>
+            </div>
+            <div class="input-group" id="groupMembersMultiSelectContainer" style="display: none;">
+                <label>选择群成员（可多选）:</label>
+                <div id="groupMembersMultiSelect" class="multi-select-list"></div>
+            </div>
+            
+            <div class="input-group" id="phoneNumberContainer">
+                <label id="numberLabel" for="phoneNumber">电话号码（国际格式）:</label>
+                <input type="text" id="phoneNumber" placeholder="例如：+7 777 000 00 00">
+            </div>
+            <div class="input-group" id="groupNameContainer" style="display: none;">
+                <label for="groupName">或输入群聊名称:</label>
+                <input type="text" id="groupName" placeholder="输入群聊名称">
+            </div>
+            <div class="input-group">
+                <label for="message">消息内容:</label>
+                <textarea id="message" rows="4" placeholder="请输入要发送的消息..."></textarea>
+            </div>
+            <button onclick="sendMessage()">发送消息</button>
+            <div id="status"></div>
+        </div>
+        
+        <div class="logs-container">
+            <div class="logs-header">
+                <h2>发送日志</h2>
+                <div class="logs-actions">
+                    <button onclick="loadLogs()" class="refresh-btn">刷新日志</button>
+                    <button onclick="clearLogs()" class="clear-btn">清空日志</button>
+                </div>
+            </div>
+            <div id="logs" class="logs-content"></div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html> 
